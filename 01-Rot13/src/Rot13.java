@@ -1,4 +1,12 @@
 public class Rot13{
+    
+
+    public static String xifraRot13(String cadena) {
+    }
+
+    public static String desxifraRot13(String cadena) {
+    
+    }
     public static void main(String[] args){
         String msgs[] =("ABC","XYZ","Hola, Mr. calçot", "Perdó, per tu què és?");
         String msgXifrat[] = new String[msgs.length];
