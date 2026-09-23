@@ -11,20 +11,40 @@ public class RotX {
             'I', 'Í', 'Ì', 'Ï', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'Ó', 'Ò',
             'P', 'Q', 'R', 'S', 'T', 'U', 'Ú', 'Ù', 'Ü', 'V', 'W', 'X', 'Y', 'Z'
     };
+    public static int[] posicions = {0, 2, 4, 6, 8, 10};
+
+    public static String minusculesStr = new String(minuscules);
+    public static String majusculesStr = new String(majuscules);
+
     public static String xifraRotX(String cadena, int desplazament){
-        for(int i=0; i<cadena,length; i++){
+        for(int i=0; i<cadena.length(); i++){
             
         }
     }
     public static String desxifraRotX(String cadena, int desplazament){
 
     }
+    
+    public static 
     public static String forcaBrutaRot(String cadenaXifrada){
 
     }
 
     public static void main(String[] args) {
+        String msgs[] = {"ABC", "XYZ", "hOLA, Mr. calçot", "Perdó, per tu què és?"} ;
+        String msgXifrat[] = new String[msgs.length];
+
+        System.out.println("\nXifrat\n-------------");
+
+        for(int i=0; i<msgXifrat.length; i++){
+            msgXifrat[i] = xifraRot13(msgs[i]);
+            System.out.printf("%-23s => %s%n", msgs[i], msgXifrat[i]);
+        }
+        System.out.printf("\nDesxifrat\n--------");
         
+        for(String msg: msgXifrat){
+            System.out.printf("%-23s => %s%n", msg, desxifraRot13(msg));
+        }
     }
     
 }
