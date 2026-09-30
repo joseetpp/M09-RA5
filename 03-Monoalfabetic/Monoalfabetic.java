@@ -79,14 +79,13 @@ public class Monoalfabetic {
         return resultat.toString();
     }
 
-    // Método getter por si necesitas imprimir o pasar el alfabeto permutado
     public char[] getAlfabetPermutat() {
         return alfabetPermutat;
     }
     public static void main(String[] args) {
         Monoalfabetic mono = new Monoalfabetic();
 
-        // 1. Mostrar alfabeto original y permutado
+        //Mostrar alfabeto original
         for (char c : mono.MAJUSCULES) {
             System.out.print(c + " ");
         }
@@ -97,14 +96,12 @@ public class Monoalfabetic {
         }
         System.out.println("\n");
 
-        // Pruebas requeridas en la salida esperada
         String[] proves = {
             "Test 01 àrbitre, coixí, Perímetre",
             "Test 02 Taüll, DÍA, año",
             "Test 03 Peça, Òrrius, Bòvila"
         };
 
-        // 2. Cifrado
         System.out.println("Xifratge:");
         String[] xifrats = new String[proves.length];
         for (int i = 0; i < proves.length; i++) {
@@ -113,7 +110,6 @@ public class Monoalfabetic {
         }
         System.out.println();
 
-        // 3. Descifrado
         System.out.println("Desxifratge:");
         for (int i = 0; i < xifrats.length; i++) {
             String desxifrat = mono.desxifraMonoAlfa(xifrats[i]);
