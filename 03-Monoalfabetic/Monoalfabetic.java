@@ -10,16 +10,15 @@ public class Monoalfabetic {
         this.alfabetPermutat = permutaAlfabet(MAJUSCULES);
     }
 
-    //generi una permutació de l'alfabet complet amb accents greus, aguts, dièresi, «с» і «ñ» i la retorni en un array de char.
+    //generi una permutació de l'alfabet complet amb accents greus
     public char[] permutaAlfabet(char[] alfabet) {
         Random random = new Random();
         char[] nouAlfabet = alfabet.clone();
 
-        // 2. Algoritmo Fisher-Yates (recorre de atrás hacia adelante intercambiando posiciones)
+        //Algoritmo Fisher-Yates (recorre de atrás hacia adelante intercambiando posiciones)
         for (int i = nouAlfabet.length - 1; i > 0; i--) {
             int j = random.nextInt(i + 1); 
             
-            // Intercambiamos nouAlfabet[i] con nouAlfabet[j]
             char temp = nouAlfabet[i];
             nouAlfabet[i] = nouAlfabet[j];
             nouAlfabet[j] = temp;
@@ -33,7 +32,7 @@ public class Monoalfabetic {
                 return i;
             }
         }
-        return -1; // No encontro signos
+        return -1; 
     }
         // xifre la cadena passada com a paràmetre amb xifratge monoalfabètic utilitzant la permutació generada inicialment
     public String xifraMonoAlfa(String cadena){
