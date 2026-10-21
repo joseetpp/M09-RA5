@@ -106,6 +106,5 @@ public class Aes {
             System.out.println("Enc: " + new String(bXifrats));
             System.out.println("Dec: " + desxifrat);
         }
-
     }
 }
