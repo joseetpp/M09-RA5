@@ -59,24 +59,114 @@ try {
     }
     }
 
-    /**
-     * Ejecuta un ataque de fuerza bruta utilizando el charset "abcdefABCDEF1234567890!".[cite: 1]
-     * La longitud máxima de las contraseñas a probar será de 6 caracteres.[cite: 1]
-     * Debe implementar bucles anidados para iterar cada posición (del 1 al 6) utilizando preferiblemente un char[].[cite: 1]
-     * Asegúrate de poner la variable de clase npass a 0 al inicio y aumentarla en cada iteración.[cite: 2]
-     */
+    // Ejecuta un ataque de fuerza bruta utilizando el charset "abcdefABCDEF1234567890!".
     public String forcaBruta (String alg, String hash, String salt) {
-        // Implementar ataque de fuerza bruta
-        return null;
-    }
+        npass = 0;
+        //Definimos el charset indicado en el enunciado
+        char[] charset = "abcdefABCDEF1234567890!".toCharArray();
+        // Bucles anidados para probar exhaustivamente las combinaciones
+        // Iteramos 6 veces
+        // --- Longitud 1 ---
+        for (int i = 0; i < charset.length; i++) {
+            char[] pw = new char[]{ charset[i] };
+            if (comprovarHash(pw, alg, hash, salt)) return new String(pw);
+        }
 
-    /**
-     * Calcula la diferencia entre t1 y t2 y la devuelve formateada.[cite: 1]
-     * El formato de salida esperado debe mostrar días, horas, minutos, segundos y milisegundos.[cite: 3]
-     */
-    public String getInterval (long t1, long t2) {
-        // Implementar cálculo y formato de tiempo
-        return null;
+        // --- Longitud 2 ---
+        for (int i = 0; i < charset.length; i++) {
+            for (int j = 0; j < charset.length; j++) {
+                char[] pw = new char[]{ charset[i], charset[j] };
+                if (comprovarHash(pw, alg, hash, salt)) return new String(pw);
+            }
+        }
+
+        // --- Longitud 3 ---
+        for (int i = 0; i < charset.length; i++) {
+            for (int j = 0; j < charset.length; j++) {
+                for (int k = 0; k < charset.length; k++) {
+                    char[] pw = new char[]{ charset[i], charset[j], charset[k] };
+                    if (comprovarHash(pw, alg, hash, salt)) return new String(pw);
+                }
+            }
+        }
+
+        // --- Longitud 4 ---
+        for (int i = 0; i < charset.length; i++) {
+            for (int j = 0; j < charset.length; j++) {
+                for (int k = 0; k < charset.length; k++) {
+                    for (int l = 0; l < charset.length; l++) {
+                        char[] pw = new char[]{ charset[i], charset[j], charset[k], charset[l] };
+                        if (comprovarHash(pw, alg, hash, salt)) return new String(pw);
+                    }
+                }
+            }
+        }
+
+        // --- Longitud 5 ---
+        for (int i = 0; i < charset.length; i++) {
+            for (int j = 0; j < charset.length; j++) {
+                for (int k = 0; k < charset.length; k++) {
+                    for (int l = 0; l < charset.length; l++) {
+                        for (int m = 0; m < charset.length; m++) {
+                            char[] pw = new char[]{ charset[i], charset[j], charset[k], charset[l], charset[m] };
+                            if (comprovarHash(pw, alg, hash, salt)) return new String(pw);
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- Longitud 6 ---
+        for (int i = 0; i < charset.length; i++) {
+            for (int j = 0; j < charset.length; j++) {
+                for (int k = 0; k < charset.length; k++) {
+                    for (int l = 0; l < charset.length; l++) {
+                        for (int m = 0; m < charset.length; m++) {
+                            for (int n = 0; n < charset.length; n++) {
+                                char[] pw = new char[]{ charset[i], charset[j], charset[k], charset[l], charset[m], charset[n] };
+                                if (comprovarHash(pw, alg, hash, salt)) return new String(pw);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return null; // Si no encuentra nada tras probar hasta 6 caracteres
+    }
+    //Sirve para validar la contraseña
+    private boolean comprovarHash(char[] pwChars, String alg, String hashOriginal, String salt) {
+        // Incrementamos el contador con cada password provado
+        npass++; 
+        
+        String pwString = new String(pwChars);
+        String hashGenerado = null;
+        
+        // Dependiendo del algoritmo, llamamos a un método o a otro
+        if (alg.equals("SHA-512")) {
+            hashGenerado = getSHA512AmbSalt(pwString, salt);
+        } else if (alg.equals("PBKDF2")) {
+            hashGenerado = getPBKDF2AmbSalt(pwString, salt);
+        }
+        
+        // Comprobamos si el hash que acabamos de generar coincide con el que buscamos
+        return hashOriginal.equals(hashGenerado);
+    }
+    //Calcula la diferencia entre t1 y t2 y la devuelve formateada
+    public String getInterval(long t1, long t2) {
+        //Calculamos la diferencia total en milisegundos
+        long diferencia = t2 - t1;
+        
+        //Extraemos las unidades de tiempo usando divisiones y el operador módulo (%)
+        long millis = diferencia % 1000; 
+        long segons = (diferencia / 1000) % 60; 
+        long minuts = (diferencia / (1000 * 60)) % 60; 
+        long hores = (diferencia / (1000 * 60 * 60)) % 24; 
+        long dies = diferencia / (1000 * 60 * 60 * 24); 
+        
+        // Formateamos el string exactamente como pide el enunciado[cite: 3]
+        return String.format("%d dies / %d hores / %d minuts / %d segons / %d millis", 
+                            dies, hores, minuts, segons, millis);
     }
 
     // Código aportado para el método main[cite: 2]
